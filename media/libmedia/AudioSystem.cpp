@@ -789,7 +789,7 @@ extern "C" audio_io_handle_t _ZN7android11AudioSystem9getOutputENS0_11stream_typ
                                     uint32_t channels,
                                     audio_policy_output_flags_t flags) 
 {
-   return AudioSystem::getOutput(stream,samplingRate,format,channels>>2,flags);
+    return AudioSystem::getOutput(stream,samplingRate,format,channels>>2,flags);
 }
 
 extern "C" bool _ZN7android11AudioSystem11isLinearPCMEj(uint32_t format)
@@ -811,6 +811,16 @@ extern "C" bool _ZN7android11AudioSystem15isLowVisibilityENS0_11stream_typeE(aud
 #endif // AUDIO_LEGACY
 
 #ifdef YAMAHAPLAYER
+extern "C" status_t _ZN7android11AudioSystem11startOutputEiNS0_11stream_typeEi(audio_io_handle_t output, audio_stream_type_t stream)
+{
+    return AudioSystem::startOutput(output, stream);
+}
+
+extern "C" status_t _ZN7android11AudioSystem10stopOutputEiNS0_11stream_typeEi(audio_io_handle_t output, audio_stream_type_t stream)
+{
+    return AudioSystem::stopOutput(output, stream);
+}
+
 extern "C" bool _ZN7android11AudioSystem17isSeparatedStreamE19audio_stream_type_t(audio_stream_type_t stream)
 {
     LOGD("android::AudioSystem::isSeparatedStream(audio_stream_type_t) called!");
@@ -828,6 +838,7 @@ extern "C" bool _ZN7android11AudioSystem17isSeparatedStreamE19audio_stream_type_
     LOGD("isSeparatedStream: false");
     return false;
 }
+
 #endif // YAMAHAPLAYER
 
 }; // namespace android
